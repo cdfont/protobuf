@@ -1,0 +1,19 @@
+// Interfaces to retrieve information from the dynamoDB. This protobuf and others
+// will be shared here with clients. 
+
+syntax = "proto3";
+
+option go_package = "middleware_metadata_service/shared-protobufs";
+package go_getter_grpc;
+
+service GoGetter {
+    rpc GetOfferings(OfferingsRequest) returns (OfferingsResponse) {}
+}
+
+message OfferingsRequest {
+    repeated string offering_ids = 1; // The number of ids can be 0 to n. Order is preserved.
+}
+
+message OfferingsResponse {
+    map<string, bytes> offerings = 1;
+}
